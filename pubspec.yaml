@@ -1,0 +1,14 @@
+name: tested
+description: boring tests no more
+version: 0.1.0+1
+
+environment:
+  sdk: "^3.3.0"
+
+dependency_overrides:
+  faker: ^2.1.0
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0
+dependencies:
+  faker: ^2.1.0
