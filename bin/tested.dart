@@ -32,7 +32,7 @@ void main() {
 
   for (final lib in currentLibs) {
     for (final type in lib.declarations.values) {
-      type.invokeAnnotated(lib);
+      type.invokeAnnotated<Tested>(lib);
     }
     // final r = [
     //   for (final MapEntry(key: lib, value: declaration) in m.libraries.entries)
@@ -45,7 +45,7 @@ void main() {
 }
 
 extension InvokeAnnotatedX on reflector.DeclarationMirror {
-  void invokeAnnotated(reflector.LibraryMirror lib) {
+  void invokeAnnotated<T>(reflector.LibraryMirror lib) {
     if (!isTopLevel) {
       throw ArgumentError('Only top level methods are supported');
     }
@@ -55,7 +55,7 @@ extension InvokeAnnotatedX on reflector.DeclarationMirror {
     final type = this as reflector.MethodMirror;
 
     for (final meta in type.metadata) {
-      if (meta.type.simpleName == testedSymbol) {
+      if (meta.type.simpleName == Symbol(T.toString())) {
         // ignore: avoid_dynamic_calls
         for (var i = 0; i < (meta.reflectee.testcaseCount as int); i++) {
           final params = _generateRandomParams(type.parameters);
