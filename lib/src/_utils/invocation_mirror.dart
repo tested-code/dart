@@ -8,9 +8,9 @@ extension InvokeAnnotated on LibraryMirror {
   void invokeAnnotated<T>() {
     // ignore: no_leading_underscores_for_local_identifiers
     for (final _type in declarations.values) {
-      if (_type is! MethodMirror) return;
+      if (_type is! MethodMirror) continue;
 
-      if (!_type.isTopLevel) return;
+      if (!_type.isTopLevel) continue;
 
       for (final meta in _type.metadata) {
         if (meta.type.simpleName == Symbol(T.toString())) {
